@@ -50,8 +50,7 @@ Cette API REST, développée avec Spring Boot, permet la gestion d'une liste de 
           "title": "Acheter des courses",
           "description": "Acheter du lait, des œufs et du pain.",
           "completed": false
-        },
-        ...
+        }
       ]
       ```
 
