@@ -155,4 +155,6 @@ Cette API REST, développée avec Spring Boot, permet la gestion d'une liste de 
 Pour toute question ou suggestion d'amélioration, veuillez me contacter :
 
 - **Email** : terrade.antoine.pro@gmail.com
-- **GitHub** : [https://github.com/tonylapoche/todolist-api](https://github.com/tonylapoche/todolist-api)
+- **LinkedIn** : [Antoine Terrade](https://www.linkedin.com/in/antoine-terrade-web/)
+- **GitHub** : [Mes autres projets](https://github.com/tonylapoche)
+- **Mon site** : [Portfolio](https://antoineterrade.com)
