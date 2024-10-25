@@ -1,16 +1,19 @@
 package com.rpg.todolist.mappers;
 
-import com.rpg.todolist.dto.CreateTodoDTO;
-import com.rpg.todolist.dto.TodoDTO;
+import com.rpg.todolist.dto.todo.CreateTodoDTO;
+import com.rpg.todolist.dto.todo.TodoDTO;
 import com.rpg.todolist.entity.Todo;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TodoMapperAuto {
-    TodoMapperAuto MAPPER = Mappers.getMapper(TodoMapperAuto.class);
 
     TodoDTO toDTO(Todo todo);
+
+    @Mapping(ignore = true, target = "id")
     Todo toEntity(CreateTodoDTO createTodoDTO);
-    void updateEntityFromDTO(TodoDTO todoDTO, Todo todo);
+
+    void updateEntityFromDTO(TodoDTO todoDTO, @MappingTarget Todo todo);
 }

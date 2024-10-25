@@ -1,21 +1,22 @@
 package com.rpg.todolist.controllers;
 
-import com.rpg.todolist.dto.CreateTodoDTO;
-import com.rpg.todolist.dto.TodoDTO;
+import com.rpg.todolist.dto.todo.CreateTodoDTO;
+import com.rpg.todolist.dto.todo.TodoDTO;
 import com.rpg.todolist.service.TodoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/todos")
 public class TodoController {
 
     private final TodoService todoService;
-
-    public TodoController(TodoService todoService) {
-        this.todoService = todoService;
-    }
 
     @GetMapping
     public List<TodoDTO> getAllTodos() {
@@ -28,8 +29,10 @@ public class TodoController {
     }
 
     @PostMapping
-    public TodoDTO createTodo(@RequestBody CreateTodoDTO createTodoDTO) {
-        return todoService.createTodo(createTodoDTO);
+    public ResponseEntity<TodoDTO> createTodo(@RequestBody CreateTodoDTO createTodoDTO) {
+        TodoDTO todo = todoService.createTodo(createTodoDTO);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(todo.getId()).toUri();
+        return ResponseEntity.created(location).body(todo);
     }
 
     @PutMapping("/{id}")
