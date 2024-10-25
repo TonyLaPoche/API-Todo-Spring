@@ -35,9 +35,7 @@ public class TodoService {
     }
 
     public TodoDTO createTodo(CreateTodoDTO createTodoDTO) {
-        Todo todo = new Todo();
-        todo.setTitle(createTodoDTO.getTitle());
-        todo.setDescription(createTodoDTO.getDescription());
+        Todo todo = TodoMapper.toEntity(createTodoDTO);
         todo = todoRepository.save(todo);
         return TodoMapper.toDTO(todo);
     }
@@ -45,8 +43,7 @@ public class TodoService {
     public TodoDTO updateTodo(Long id, TodoDTO todoDTO) {
         Todo todo = todoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found"));
-        todo.setTitle(todoDTO.getTitle());
-        todo.setDescription(todoDTO.getDescription());
+        TodoMapper.updateEntityFromDTO(todoDTO, todo);
         todo = todoRepository.save(todo);
         return TodoMapper.toDTO(todo);
     }
@@ -56,6 +53,10 @@ public class TodoService {
             throw new RuntimeException("Todo with ID " + id + " not found");
         }
         todoRepository.deleteById(id);
+    }
+
+    public void deleteAllTodos() {
+        todoRepository.deleteAll();
     }
 }
 
